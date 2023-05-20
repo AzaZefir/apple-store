@@ -1,0 +1,14 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  div {
+    .popup {
+      select {
+        border: none;
+        outline: none;
+        background-color: rgba(234, 234, 234, 1);
+      }
+    }
+  }
+}
