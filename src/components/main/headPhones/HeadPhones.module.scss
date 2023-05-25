@@ -1,0 +1,31 @@
+.headphones {
+  h4 {
+    margin: 36px 0 20px 0;
+  }
+  .cards {
+    .card {
+      width: 350px;
+      height: 407.65px;
+      background: #ffffff;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+      position: relative;
+      > img {
+        position: absolute;
+        top: 15px;
+        left: 22px;
+      }
+      figcaption {
+        margin-top: 20px;
+        text-align: center;
+        .price {
+          span {
+            &:last-child {
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+    }
+  }
+}
