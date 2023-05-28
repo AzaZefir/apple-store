@@ -1,5 +1,6 @@
 import scss from './Cases.module.scss';
 import casesPic from '../../../assets/img/cases/case-pic.svg';
+import { Link } from 'react-router-dom';
 
 export const Cases = () => {
   const casesData = [
@@ -29,7 +30,9 @@ export const Cases = () => {
             className={`${scss.card} 
                 d-flex align-items-center justify-content-center`}>
             <figure>
-              <img src={el.img} alt={el.title} />
+              <Link to="/catalog-item-page">
+                <img src={el.img} alt={el.title} />
+              </Link>
               <figcaption>{el.title}</figcaption>
             </figure>
           </div>

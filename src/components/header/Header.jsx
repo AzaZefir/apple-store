@@ -5,6 +5,7 @@ import FavoriteSvg from '../../assets/img/header/favoriteSvg.svg';
 import CartSvg from '../../assets/img/header/cartSvg.svg';
 
 import scss from './Header.module.scss'
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
@@ -25,9 +26,9 @@ export const Header = () => {
           <a href="/">
             <img src={FavoriteSvg} alt="favorite" title="favorite" />
           </a>
-          <a href="/">
+          <Link to="/cart">
             <img src={CartSvg} alt="cart" title="cart" />
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
