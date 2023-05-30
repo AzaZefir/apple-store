@@ -1,0 +1,32 @@
+.cart {
+  .addedItemBlock {
+    .addedItem {
+      height: 230px;
+      background: #ffffff;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+      padding: 18px;
+      figure {
+        width: 146.53px;
+        height: 136px;
+        img {
+          width: 100%;
+        }
+      }
+      .plusMinus {
+        div {
+          width: 35px;
+          height: 35px;
+          background: #ffce7f;
+          border-radius: 50%;
+        }
+      }
+    }
+    .delivery{
+      background: #ffffff;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+      padding: 18px;
+    }
+  }
+}

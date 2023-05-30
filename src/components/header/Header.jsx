@@ -6,6 +6,7 @@ import CartSvg from '../../assets/img/header/cartSvg.svg';
 
 import scss from './Header.module.scss'
 import { Link } from 'react-router-dom';
+import { CustomDropdown } from '../common/CustomDropdown';
 
 export const Header = () => {
   return (
@@ -15,12 +16,7 @@ export const Header = () => {
           <a href="/">
             <img src={Logo} alt="logo" title="logo" />
           </a>
-          <div className={`${scss.popup} d-flex gap-2`}>
-            <img src={PhoneSvg} alt="phone" title="phone" />
-            <select>
-              <option>Выбрать модель телефона</option>
-            </select>
-          </div>
+          <CustomDropdown img={PhoneSvg} text='Выбрать модель телефона'/>
         </nav>
         <nav className='d-flex gap-4'>
           <a href="/">
