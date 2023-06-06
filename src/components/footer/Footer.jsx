@@ -1,6 +1,7 @@
 import logoSvg from '../../assets/img/header/QPICK-logo.svg';
 import vkSvg from '../../assets/img/footer/VK.svg';
 import scss from './Footer.module.scss';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
@@ -11,20 +12,20 @@ export const Footer = () => {
       <nav>
         <ul>
           <li>
-            <a href="/">Избранное</a>
+            <Link to="/favorite">Избранное</Link>
           </li>
           <li>
-            <a href="/">Корзина</a>
+            <Link to="/cart">Корзина</Link>
           </li>
           <li>
-            <a href="/">Контакты</a>
+            <Link to="/contacts">Контакты</Link>
           </li>
         </ul>
       </nav>
       <nav>
         <ul>
           <li>
-            <a href="/">Условия сервиса</a>
+            <Link to="/service">Условия сервиса</Link>
           </li>
         </ul>
       </nav>
