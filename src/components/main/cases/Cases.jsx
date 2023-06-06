@@ -1,43 +1,57 @@
 import scss from './Cases.module.scss';
-import casesPic from '../../../assets/img/cases/case-pic.svg';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
+import { Preloader } from '../../common/Preloader';
 
 export const Cases = () => {
-  const casesData = [
-    {
-      id: 1,
-      img: 'casesPic',
-      title: 'Стеклянные',
-    },
-    {
-      id: 2,
-      img: casesPic,
-      title: 'Силиконовые',
-    },
-    {
-      id: 3,
-      img: casesPic,
-      title: 'Кожаные',
-    },
-  ];
+  const [casesData, setCasesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const casesItemRef = collection(db, 'cases');
+
+  useEffect(() => {
+    const getDataFromFirebase = async () => {
+      try {
+        const data = await getDocs(casesItemRef);
+        const items = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setCasesData(items);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDataFromFirebase();
+  }, []);
+
   return (
-    <section className={`${scss.cases} container `}>
-      <h4>Чехлы</h4>
-      <div className={`${scss.cards} d-flex justify-content-between`}>
-        {casesData.map((el) => (
-          <div
-            key={el.id}
-            className={`${scss.card} 
+    <>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <section className={`${scss.cases} container `}>
+          <h4>Чехлы</h4>
+          <div className={`${scss.cards} d-flex justify-content-between`}>
+            {casesData.map((el) => (
+              <div
+                key={el.id}
+                className={`${scss.card} 
                 d-flex align-items-center justify-content-center`}>
-            <figure>
-              <Link to="/catalog-item-page">
-                <img src={el.img} alt={el.title} />
-              </Link>
-              <figcaption>{el.title}</figcaption>
-            </figure>
+                <figure>
+                  <Link to="/catalog-item-page">
+                    <img src={el.img} alt={el.title} />
+                  </Link>
+                  <figcaption>{el.title}</figcaption>
+                </figure>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
