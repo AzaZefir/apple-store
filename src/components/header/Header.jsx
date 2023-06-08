@@ -13,9 +13,9 @@ export const Header = () => {
     <header className={scss.header}>
       <div className="container d-flex align-items-center justify-content-between">
         <nav className='d-flex align-items-center gap-5'>
-          <a href="/">
+          <Link to="/">
             <img src={Logo} alt="logo" title="logo" />
-          </a>
+          </Link>
           <CustomDropdown img={PhoneSvg} text='Выбрать модель телефона'/>
         </nav>
         <nav className='d-flex gap-4'>

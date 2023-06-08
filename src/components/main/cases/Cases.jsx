@@ -27,7 +27,7 @@ export const Cases = () => {
     };
     getDataFromFirebase();
   }, []);
-
+console.log(casesData);
   return (
     <>
       {isLoading ? (
@@ -42,7 +42,7 @@ export const Cases = () => {
                 className={`${scss.card} 
                 d-flex align-items-center justify-content-center`}>
                 <figure>
-                  <Link to="/catalog-item-page">
+                  <Link to={`/catalog-item-page/${el.id}`}>
                     <img src={el.img} alt={el.title} />
                   </Link>
                   <figcaption>{el.title}</figcaption>

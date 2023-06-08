@@ -16,7 +16,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/catalog-item-page" element={<CatalogItemPage />} />
+        {/* <Route path="/catalog-item-page" element={<CatalogItemPage />} /> */}
+        <Route path="/catalog-item-page/:id" element={<CatalogItemPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path="/ready-order" element={<ReadyOrder />} />
