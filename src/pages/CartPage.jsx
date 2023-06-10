@@ -10,47 +10,29 @@ import { CustomDropdown } from '../components/common/CustomDropdown';
 import { Link } from 'react-router-dom';
 import { EmptyPage } from './EmptyPage';
 
-export const CartPage = () => {
-  const cartItems = [
-    {
-      id: 1,
-      img: addedItemSvg,
-      count: 1,
-      title: 'Apple BYZ S852I',
-      price: 2927,
-      oldPrice: 2927,
-    },
-    {
-      id: 2,
-      img: addedItemSvg,
-      count: 1,
-      title: 'Apple BYZ S852I',
-      price: 2927,
-      oldPrice: 2927,
-    },
-  ];
+export const CartPage = ({emptyCart,removeItemFromCart,total}) => {
 
   return (
     <div className={`${scss.cart} container my-4`}>
-      {cartItems.length ? (
+      {emptyCart.length ? (
         <section>
           <h4>Корзина</h4>
 
           <div className="row">
             <div className={`${scss.addedItemBlock} col d-flex flex-column gap-4`}>
-              {cartItems.map((el) => (
+              {emptyCart.map((el) => (
                 <div
                   className={`${scss.addedItem} d-flex align-items-center justify-content-between`}>
                   <div className="d-flex flex-column gap-2">
                     <figure>
-                      <img src={el.img} alt={el.title} />
+                      <img className='w-50' src={el.img} alt={el.title} />
                     </figure>
                     <div className={`${scss.plusMinus} d-flex gap-3`}>
                       <div className="d-flex align-items-center justify-content-center">
                         <img src={minusSvg} alt="Минус" />
                       </div>
                       <span className="d-flex align-items-center justify-content-center">
-                        {el.count}
+                        {total}
                       </span>
                       <div className="d-flex align-items-center justify-content-center">
                         <img src={plusSvg} alt="Плюс" />
@@ -62,7 +44,7 @@ export const CartPage = () => {
                     <span>{el.price} сом</span>
                   </div>
                   <div className="d-flex align-items-end justify-content-between flex-column h-100">
-                    <img src={deleteSvg} alt="Удалить" />
+                    <img onClick={() => removeItemFromCart(el)} src={deleteSvg} alt="Удалить" />
                     <span> {el.oldPrice} сом</span>
                   </div>
                 </div>

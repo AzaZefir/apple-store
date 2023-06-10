@@ -7,24 +7,35 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { Preloader } from '../components/common/Preloader';
 
-export const CatalogItemPage = () => {
+export const CatalogItemPage = ({ handleAddToCart }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [itemData, setItemData] = useState([]);
+  const [itemData, setItemData] = useState(null);
 
   const { id } = useParams();
+
+  const onAddToCart = () => {
+    const item = {
+      id: itemData.id,
+      title: itemData.title,
+      price: itemData.price,
+      img: itemData.img,
+    };
+    handleAddToCart(item);
+  };
+
 
   useEffect(() => {
     const getItemData = async () => {
       const item = doc(db, 'cases', id);
       const itemHeadPhones = doc(db, 'headPhones', id);
-      
+
       const data = await getDoc(item);
       const dataH = await getDoc(itemHeadPhones);
 
       if (data.exists() || dataH.exists()) {
         const el = {
-          id: data.id,
-          ...data.data(),
+          id: data.id || dataH.id,
+          ...(data.data() || dataH.data()),
         };
         setItemData(el);
         setIsLoading(false);
@@ -80,7 +91,7 @@ export const CatalogItemPage = () => {
             </div>
             <div className="col-3 d-flex flex-column gap-4">
               <button>Купить!</button>
-              <button>Добавить в корзину</button>
+              <button onClick={onAddToCart}>Добавить в корзину</button>
             </div>
           </section>
         </div>
