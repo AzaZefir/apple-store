@@ -1,5 +1,4 @@
 import React from 'react';
-import addedItemSvg from '../assets/img/headPhones/airpods.svg';
 import minusSvg from '../assets/img/cart/minus.svg';
 import plusSvg from '../assets/img/cart/plus.svg';
 import deleteSvg from '../assets/img/cart/delete.svg';
@@ -10,8 +9,12 @@ import { CustomDropdown } from '../components/common/CustomDropdown';
 import { Link } from 'react-router-dom';
 import { EmptyPage } from './EmptyPage';
 
-export const CartPage = ({emptyCart,removeItemFromCart,total}) => {
-
+export const CartPage = ({
+  emptyCart,
+  removeItemFromCart,
+  handleAddToCart,
+  handleMinusFromCart,
+}) => {
   return (
     <div className={`${scss.cart} container my-4`}>
       {emptyCart.length ? (
@@ -22,19 +25,24 @@ export const CartPage = ({emptyCart,removeItemFromCart,total}) => {
             <div className={`${scss.addedItemBlock} col d-flex flex-column gap-4`}>
               {emptyCart.map((el) => (
                 <div
+                  key={el.id}
                   className={`${scss.addedItem} d-flex align-items-center justify-content-between`}>
                   <div className="d-flex flex-column gap-2">
                     <figure>
-                      <img className='w-50' src={el.img} alt={el.title} />
+                      <img className="w-50" src={el.img} alt={el.title} />
                     </figure>
                     <div className={`${scss.plusMinus} d-flex gap-3`}>
-                      <div className="d-flex align-items-center justify-content-center">
+                      <div
+                        onClick={() => handleMinusFromCart(el)}
+                        className="d-flex align-items-center justify-content-center">
                         <img src={minusSvg} alt="Минус" />
                       </div>
                       <span className="d-flex align-items-center justify-content-center">
-                        {total}
+                        {el.total}
                       </span>
-                      <div className="d-flex align-items-center justify-content-center">
+                      <div
+                        onClick={() => handleAddToCart(el)}
+                        className="d-flex align-items-center justify-content-center">
                         <img src={plusSvg} alt="Плюс" />
                       </div>
                     </div>
@@ -58,9 +66,9 @@ export const CartPage = ({emptyCart,removeItemFromCart,total}) => {
                   height="150"
                   title="hello"
                   style={{ border: '0' }}
-                  allowfullscreen=""
+                  allowFullScreen=""
                   loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  referrerPolicy="no-referrer-when-downgrade"></iframe>
                 <div className="d-flex align-items-center justify-content-between mt-3 ">
                   <CustomDropdown img={deliverySvg} text="Доставка курьером" />
                   <span> 499 сом</span>

@@ -13,14 +13,21 @@ import { Service } from './pages/Service';
 
 const App = () => {
   const [emptyCart, setEmptyCart] = useState([]);
-  
+
+  const generateOrderNumber = () => {
+    const orderNumber = Math.random(Math.random() * 10000).toFixed(5);
+    return orderNumber;
+  };
+
+  const orderNum = generateOrderNumber();
+
   console.log(emptyCart);
 
   const handleAddToCart = (item) => {
     const existItem = emptyCart.find((el) => el.id === item.id);
     if (existItem) {
       const newItem = emptyCart.map((el) =>
-        el.id === item.id ? { ...existItem, total: item.total + 1 } : el,
+        el.id === item.id ? { ...existItem, total: existItem.total + 1 } : el,
       );
       setEmptyCart(newItem);
       localStorage.setItem('items', JSON.stringify(newItem));
@@ -34,6 +41,21 @@ const App = () => {
     const newItem = emptyCart.filter((el) => el.id !== item.id);
     setEmptyCart(newItem);
     localStorage.setItem('items', JSON.stringify(newItem));
+  };
+
+  const handleMinusFromCart = (item) => {
+    const existItem = emptyCart.find((el) => el.id === item.id);
+    if (existItem.total === 1) {
+      const newItem = emptyCart.filter((el) => el.id !== item.id);
+      setEmptyCart(newItem);
+      localStorage.setItem('items', JSON.stringify(newItem));
+    } else {
+      const newItem = emptyCart.map((el) =>
+        el.id === item.id ? { ...existItem, total: existItem.total - 1 } : el,
+      );
+      setEmptyCart(newItem);
+      localStorage.setItem('items', JSON.stringify(newItem));
+    }
   };
 
   useEffect(() => {
@@ -52,10 +74,21 @@ const App = () => {
         />
         <Route
           path="/cart"
-          element={<CartPage emptyCart={emptyCart} removeItemFromCart={removeItemFromCart} />}
+          element={
+            <CartPage
+              emptyCart={emptyCart}
+              removeItemFromCart={removeItemFromCart}
+              handleAddToCart={handleAddToCart}
+              handleMinusFromCart={handleMinusFromCart}
+            />
+          }
         />
-        <Route path="/order" element={<OrderPage />} />
-        <Route path="/ready-order" element={<ReadyOrder />} />
+        <Route
+          path="/order"
+          element={<OrderPage emptyCart={emptyCart} generateOrderNumber={generateOrderNumber}/>}
+          
+        />
+        <Route path="/ready-order" element={<ReadyOrder orderNum={orderNum} />} />
         <Route path="/service" element={<Service />} />
         <Route path="/contacts" element={<ContactPage />} />
         {/* <Route path="*" element={<NotFoundPage />} /> */}
