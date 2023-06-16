@@ -19,6 +19,7 @@ export const CatalogItemPage = ({ handleAddToCart }) => {
       title: itemData.title,
       price: itemData.price,
       img: itemData.img,
+
     };
     handleAddToCart(item);
   };
